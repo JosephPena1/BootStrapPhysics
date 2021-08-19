@@ -29,7 +29,7 @@ void PhysicsScene::update(float deltaTime)
 	//If accumalated Time is greater than timeStep
 	while (accumulatedTime >= m_timeStep)
 	{
-		//Call each actors fixed update
+		//Call each actor's fixed update
 		for (PhysicsObject* actor : m_actors)
 			actor->fixedUpdate(m_gravity, m_timeStep);
 

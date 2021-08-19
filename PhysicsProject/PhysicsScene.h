@@ -3,6 +3,7 @@
 #include "set"
 
 class PhysicsObject;
+class Sphere;
 
 class PhysicsScene
 {
@@ -22,9 +23,11 @@ public:
 	void setTimeStep(const float timeStep) { m_timeStep = timeStep; }
 	float getTimeStep() const { return m_timeStep; }
 
+	static bool sphereToSphere(Sphere* sphere1, Sphere* sphere2);
+
 private:
 	glm::vec2 m_gravity;
-	float m_timeStep;
+	float m_timeStep = 0.01f;
 	std::set<PhysicsObject*> m_actors;
 };
 

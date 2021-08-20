@@ -75,7 +75,6 @@ bool PhysicsScene::sphereToSphere(Sphere* sphere1, Sphere* sphere2)
 			sphere2->applyForce(-(sphere2->getVelocity() * sphere2->getMass()));
 			return true;
 		}
-
 	}
 
 	return false;

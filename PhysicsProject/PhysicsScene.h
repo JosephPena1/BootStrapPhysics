@@ -3,7 +3,6 @@
 #include "set"
 
 class PhysicsObject;
-class Sphere;
 
 class PhysicsScene
 {
@@ -17,13 +16,23 @@ public:
 	void update(float deltaTime);
 	void draw();
 
+	void checkCollision();
+
 	void setGravity(const glm::vec2 gravity) { m_gravity = gravity; }
 	glm::vec2 getGravity() const { return m_gravity; }
 
 	void setTimeStep(const float timeStep) { m_timeStep = timeStep; }
 	float getTimeStep() const { return m_timeStep; }
 
-	static bool sphereToSphere(Sphere* sphere1, Sphere* sphere2);
+	static bool planeToPlane(PhysicsObject* object1, PhysicsObject* object2);
+	static bool planeToSphere(PhysicsObject* object1, PhysicsObject* object2);
+	static bool planeToBox(PhysicsObject* object1, PhysicsObject* object2);
+	static bool sphereToPlane(PhysicsObject* object1, PhysicsObject* object2);
+	static bool sphereToSphere(PhysicsObject* object1, PhysicsObject* object2);
+	static bool sphereToBox(PhysicsObject* object1, PhysicsObject* object2);
+	static bool boxToPlane(PhysicsObject* object1, PhysicsObject* object2);
+	static bool boxToSphere(PhysicsObject* object1, PhysicsObject* object2);
+	static bool boxToBox(PhysicsObject* object1, PhysicsObject* object2);
 
 private:
 	glm::vec2 m_gravity;

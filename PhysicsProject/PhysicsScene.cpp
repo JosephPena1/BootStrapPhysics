@@ -2,7 +2,6 @@
 #include "PhysicsObject.h"
 #include "Sphere.h"
 #include "Plane.h"
-//#include "Box.h"
 #include "glm/ext.hpp"
 
 PhysicsScene::PhysicsScene() : m_timeStep(0.01f), m_gravity(glm::vec2(0, 0))
@@ -39,7 +38,23 @@ void PhysicsScene::update(float deltaTime)
 
 		accumulatedTime -= m_timeStep;
 
-		checkCollision();
+		//Check each actor for a collision
+		auto outerEnd = m_actors.end();
+		outerEnd--;
+		for (auto outer = m_actors.begin(); outer != outerEnd; outer++)
+		{
+			auto innerStart = outer;
+			innerStart++;
+			for (auto inner = innerStart; inner != m_actors.end(); inner++)
+			{
+				PhysicsObject* object1 = *outer;
+				PhysicsObject* object2 = *inner;
+
+				//Collision check
+				sphereToPlane(object1, object2);
+				planeToSphere(object1, object2);
+			}
+		}
 	}
 }
 
@@ -47,42 +62,6 @@ void PhysicsScene::draw()
 {
 	for (PhysicsObject* actor : m_actors)
 		actor->draw();
-}
-
-typedef bool(*fn)(PhysicsObject*, PhysicsObject*);
-
-static fn collisionFunctionArray[] = {
-	PhysicsScene::planeToPlane,PhysicsScene::planeToSphere,PhysicsScene::planeToBox,
-	PhysicsScene::sphereToPlane,PhysicsScene::sphereToSphere,PhysicsScene::sphereToBox,
-	PhysicsScene::boxToPlane,PhysicsScene::boxToSphere,PhysicsScene::boxToBox
-};
-
-void PhysicsScene::checkCollision()
-{
-	//Check each actor for a collision
-	auto outerEnd = m_actors.end();
-	outerEnd--;
-	for (auto outer = m_actors.begin(); outer != outerEnd; outer++)
-	{
-		auto innerStart = outer;
-		innerStart++;
-		for (auto inner = innerStart; inner != m_actors.end(); inner++)
-		{
-			PhysicsObject* object1 = *outer;
-			PhysicsObject* object2 = *inner;
-			int shapeId1 = (int)(object1->getShapeID());
-			int shapeId2 = (int)(object2->getShapeID());
-
-			int functionIdx = (shapeId1 * (int)ShapeType::LENGTH) + shapeId2;
-			fn collisionFunctionPtr = collisionFunctionArray[functionIdx];
-			if (collisionFunctionPtr != nullptr)
-				collisionFunctionPtr(object1, object2);
-
-			//Collision check
-			//sphereToPlane(object1, object2);
-			//planeToSphere(object1, object2);
-		}
-	}
 }
 
 bool PhysicsScene::planeToPlane(PhysicsObject* object1, PhysicsObject* object2)
@@ -122,7 +101,7 @@ bool PhysicsScene::sphereToPlane(PhysicsObject* object1, PhysicsObject* object2)
 
 		if (sphereToPlaneDistance <= 0)
 		{
-			sphere->applyForce(-sphere->getVelocity() * sphere->getMass());
+			sphere->applyForce(-(sphere->getVelocity() * sphere->getMass()));
 			return true;
 		}
 	}

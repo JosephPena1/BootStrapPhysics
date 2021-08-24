@@ -38,23 +38,7 @@ void PhysicsScene::update(float deltaTime)
 
 		accumulatedTime -= m_timeStep;
 
-		//Check each actor for a collision
-		auto outerEnd = m_actors.end();
-		outerEnd--;
-		for (auto outer = m_actors.begin(); outer != outerEnd; outer++)
-		{
-			auto innerStart = outer;
-			innerStart++;
-			for (auto inner = innerStart; inner != m_actors.end(); inner++)
-			{
-				PhysicsObject* object1 = *outer;
-				PhysicsObject* object2 = *inner;
-
-				//Collision check
-				sphereToPlane(object1, object2);
-				planeToSphere(object1, object2);
-			}
-		}
+		checkCollision();
 	}
 }
 
@@ -62,6 +46,45 @@ void PhysicsScene::draw()
 {
 	for (PhysicsObject* actor : m_actors)
 		actor->draw();
+}
+
+//Collision function pointer type
+typedef bool(*collisionCheckFn)(PhysicsObject*, PhysicsObject*);
+
+//Array of collision functions
+static collisionCheckFn collisionFunctionArray[] = {
+	PhysicsScene::planeToPlane,PhysicsScene::planeToSphere,PhysicsScene::planeToBox,
+	PhysicsScene::sphereToPlane,PhysicsScene::sphereToSphere,PhysicsScene::sphereToBox,
+	PhysicsScene::boxToPlane,PhysicsScene::boxToSphere,PhysicsScene::boxToBox
+};
+
+//Checks collision for each actor in the scene
+void PhysicsScene::checkCollision()
+{
+	//Check each actor for a collision
+	auto outerEnd = m_actors.end();
+	outerEnd--;
+	for (auto outer = m_actors.begin(); outer != outerEnd; outer++)
+	{
+		auto innerStart = outer;
+		innerStart++;
+		for (auto inner = innerStart; inner != m_actors.end(); inner++)
+		{
+			//Get the physics objects
+			PhysicsObject* object1 = *outer;
+			PhysicsObject* object2 = *inner;
+
+			int shapeId1 = (int)(object1->getShapeID());
+			int shapeId2 = (int)(object2->getShapeID());
+
+			//i = (y * w) + x
+			int i = (shapeId1 * (int)ShapeType::LENGTH) + shapeId2;
+			//Retreive and call the collision check from the array
+			collisionCheckFn collisionFuntionPtr = collisionFunctionArray[i];
+			if (collisionFuntionPtr != nullptr)
+				collisionFuntionPtr(object1, object2);
+		}
+	}
 }
 
 bool PhysicsScene::planeToPlane(PhysicsObject* object1, PhysicsObject* object2)

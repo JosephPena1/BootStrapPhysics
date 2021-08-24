@@ -21,7 +21,7 @@ bool PhysicsGame::startup()
 
 	Sphere* ball = new Sphere(glm::vec2(-20, 0), glm::vec2(), 1, 5, glm::vec4(0.8f, 0.2f, 0.2f, 0.8f));
 	m_scene->addActor(ball);
-	//ball->applyForce(glm::vec2(20.0f, 0.0f));
+	ball->applyForce(glm::vec2(20.0f, 0.0f));
 
 	Sphere* ball2 = new Sphere(glm::vec2(20, 0), glm::vec2(), 1, 5, glm::vec4(0.2f, 0.8f, 0.2f, 0.8f));
 	m_scene->addActor(ball2);
@@ -37,6 +37,7 @@ void PhysicsGame::shutdown()
 	delete m_renderer;
 	delete m_scene;
 	delete m_font;
+
 }
 
 void PhysicsGame::update(float deltaTime)

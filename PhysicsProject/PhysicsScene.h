@@ -16,6 +16,8 @@ public:
 	void update(float deltaTime);
 	void draw();
 
+	void checkCollision();
+
 	void setGravity(const glm::vec2 gravity) { m_gravity = gravity; }
 	glm::vec2 getGravity() const { return m_gravity; }
 
@@ -33,8 +35,9 @@ public:
 	static bool boxToBox(PhysicsObject* object1, PhysicsObject* object2);
 
 private:
+	typedef bool(*collisionCheckFn)(PhysicsObject*, PhysicsObject*);
+
 	glm::vec2 m_gravity;
 	float m_timeStep = 0.01f;
 	std::set<PhysicsObject*> m_actors;
 };
-

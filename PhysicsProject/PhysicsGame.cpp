@@ -11,7 +11,7 @@ bool PhysicsGame::startup()
 	aie::Gizmos::create(255U, 255U, 65535U, 65535U);
 
 	m_renderer = new aie::Renderer2D();
-	setBackgroundColour(0, 0, 0, 0);
+	setBackgroundColour(0.2f, 0.5f, 0.2f, 0.8f);
 
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
@@ -19,22 +19,21 @@ bool PhysicsGame::startup()
 	m_scene->setTimeStep(0.01f);
 	m_scene->setGravity({0.0f, 0.0f});
 
-
 	Sphere* cue = new Sphere(glm::vec2(-20, 0), glm::vec2(), 5, 5, glm::vec4(0.8f, 0.2f, 0.2f, 0.8f));
 	m_scene->addActor(cue);
 	cue->applyForce(glm::vec2(100.0f, 0.0f));
 
-	Sphere* ball1 = new Sphere(glm::vec2(20, 0), glm::vec2(), 1, 5, glm::vec4(0.2f, 0.2f, 0.2f, 0.8f));
+	Sphere* ball1 = new Sphere(glm::vec2(20, 0), glm::vec2(), 1, 5, glm::vec4(0.2f, 0.6f, 0.2f, 0.8f));
 	m_scene->addActor(ball1);
-	Sphere* ball2 = new Sphere(glm::vec2(30, 7), glm::vec2(), 1, 5, glm::vec4(0.4f, 0.9f, 0.7f, 0.8f));
+	Sphere* ball2 = new Sphere(glm::vec2(30, 7), glm::vec2(), 1, 5, glm::vec4(0.4f, 0.6f, 0.7f, 0.8f));
 	m_scene->addActor(ball2);
-	Sphere* ball3 = new Sphere(glm::vec2(30, -7), glm::vec2(), 1, 5, glm::vec4(0.6f, 0.0f, 0.5f, 0.8f));
+	Sphere* ball3 = new Sphere(glm::vec2(30, -7), glm::vec2(), 1, 5, glm::vec4(0.6f, 0.6f, 0.5f, 0.8f));
 	m_scene->addActor(ball3);
-	Sphere* ball4 = new Sphere(glm::vec2(40, 14), glm::vec2(), 1, 5, glm::vec4(0.3f, 0.1f, 0.2f, 0.8f));
+	Sphere* ball4 = new Sphere(glm::vec2(40, 14), glm::vec2(), 1, 5, glm::vec4(0.9f, 0.6f, 0.2f, 0.8f));
 	m_scene->addActor(ball4);
-	Sphere* ball5 = new Sphere(glm::vec2(40, -14), glm::vec2(), 1, 5, glm::vec4(0.2f, 0.5f, 0.2f, 0.8f));
+	Sphere* ball5 = new Sphere(glm::vec2(40, -14), glm::vec2(), 1, 5, glm::vec4(0.6f, 0.6f, 0.2f, 0.8f));
 	m_scene->addActor(ball5);
-	Sphere* ball6 = new Sphere(glm::vec2(40, 0), glm::vec2(), 1, 5, glm::vec4(0.2f, 0.3f, 0.6f, 0.4f));
+	Sphere* ball6 = new Sphere(glm::vec2(40, 0), glm::vec2(), 1, 5, glm::vec4(0.5f, 0.6f, 0.8f, 0.4f));
 	m_scene->addActor(ball6);
 
 	//Boundary
@@ -73,14 +72,6 @@ void PhysicsGame::update(float deltaTime)
 	//Exit on Esc
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
-	if (input->isKeyDown(aie::INPUT_KEY_UP))
-		m_scene->setGravity({ m_scene->getGravity().x, m_scene->getGravity().y + 10});
-	if (input->isKeyDown(aie::INPUT_KEY_DOWN))
-		m_scene->setGravity({ m_scene->getGravity().x, m_scene->getGravity().y - 10 });
-	if (input->isKeyDown(aie::INPUT_KEY_LEFT))
-		m_scene->setGravity({ m_scene->getGravity().x - 10, m_scene->getGravity().y});
-	if (input->isKeyDown(aie::INPUT_KEY_RIGHT))
-		m_scene->setGravity({ m_scene->getGravity().x + 10, m_scene->getGravity().y});
 }
 
 void PhysicsGame::draw()

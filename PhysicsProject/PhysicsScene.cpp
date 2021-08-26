@@ -124,7 +124,7 @@ bool PhysicsScene::sphereToPlane(PhysicsObject* object1, PhysicsObject* object2)
 
 		if (sphereToPlaneDistance <= 0)
 		{
-			sphere->applyForce(-(sphere->getVelocity() * sphere->getMass()));
+			plane->resolveCollision(sphere);
 			return true;
 		}
 	}
@@ -145,8 +145,7 @@ bool PhysicsScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2
 
 		if (glm::abs(distance) < totalRadius)
 		{
-			sphere1->applyForce(-(sphere1->getVelocity() * sphere1->getMass()));
-			sphere2->applyForce(-(sphere2->getVelocity() * sphere2->getMass()));
+			sphere1->resolveCollision(sphere2);
 			return true;
 		}
 	}

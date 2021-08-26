@@ -19,34 +19,40 @@ bool PhysicsGame::startup()
 	m_scene->setTimeStep(0.01f);
 	m_scene->setGravity({0.0f, 0.0f});
 
-	Sphere* cue = new Sphere(glm::vec2(-20, 0), glm::vec2(), 5, 5, glm::vec4(0.8f, 0.2f, 0.2f, 0.8f));
+	Sphere* cue = new Sphere(glm::vec2(-20, 0), glm::vec2(), 1, 5, glm::vec4(0.8f, 0.8f, 0.8f, 0.8f));
 	m_scene->addActor(cue);
-	cue->applyForce(glm::vec2(100.0f, 0.0f));
+	cue->applyForce(glm::vec2(200.0f, 0.0f));
 
-	Sphere* ball1 = new Sphere(glm::vec2(20, 0), glm::vec2(), 1, 5, glm::vec4(0.2f, 0.6f, 0.2f, 0.8f));
+	Sphere* ball1 = new Sphere(glm::vec2(20, 0), glm::vec2(), 1, 5, glm::vec4(0.8f, 0.4f, 0.2f, 0.8f));
 	m_scene->addActor(ball1);
-	Sphere* ball2 = new Sphere(glm::vec2(30, 7), glm::vec2(), 1, 5, glm::vec4(0.4f, 0.6f, 0.7f, 0.8f));
+	ball1->applyForce(glm::vec2(200.0f, 0.0f));
+	Sphere* ball2 = new Sphere(glm::vec2(30, 7), glm::vec2(), 1, 5, glm::vec4(0.4f, 0.4f, 0.8f, 0.8f));
 	m_scene->addActor(ball2);
-	Sphere* ball3 = new Sphere(glm::vec2(30, -7), glm::vec2(), 1, 5, glm::vec4(0.6f, 0.6f, 0.5f, 0.8f));
+	ball2->applyForce(glm::vec2(200.0f, 0.0f));
+	Sphere* ball3 = new Sphere(glm::vec2(30, -7), glm::vec2(), 1, 5, glm::vec4(0.8f, 0.1f, 0.5f, 0.8f));
 	m_scene->addActor(ball3);
-	Sphere* ball4 = new Sphere(glm::vec2(40, 14), glm::vec2(), 1, 5, glm::vec4(0.9f, 0.6f, 0.2f, 0.8f));
+	ball3->applyForce(glm::vec2(200.0f, 0.0f));
+	Sphere* ball4 = new Sphere(glm::vec2(40, 14), glm::vec2(), 1, 5, glm::vec4(0.5f, 0.6f, 0.0f, 0.5f));
 	m_scene->addActor(ball4);
-	Sphere* ball5 = new Sphere(glm::vec2(40, -14), glm::vec2(), 1, 5, glm::vec4(0.6f, 0.6f, 0.2f, 0.8f));
+	ball4->applyForce(glm::vec2(200.0f, 0.0f));
+	Sphere* ball5 = new Sphere(glm::vec2(40, -14), glm::vec2(), 1, 5, glm::vec4(0.5f, 0.7f, 0.9f, 0.9f));
 	m_scene->addActor(ball5);
-	Sphere* ball6 = new Sphere(glm::vec2(40, 0), glm::vec2(), 1, 5, glm::vec4(0.5f, 0.6f, 0.8f, 0.4f));
+	ball5->applyForce(glm::vec2(200.0f, 0.0f));
+	Sphere* ball6 = new Sphere(glm::vec2(40, 0), glm::vec2(), 1, 5, glm::vec4(0.2f, 0.4f, 0.8f, 0.9f));
 	m_scene->addActor(ball6);
+	ball6->applyForce(glm::vec2(200.0f, 0.0f));
 
 	//Boundary
-	Plane* top = new Plane(glm::vec2(0.0f, -1.0f), -55.0f, glm::vec4(0.2f, 0.8f, 0.2f, 0.8f));
+	Plane* top = new Plane(glm::vec2(0.0f, -1.0f), -58.0f, glm::vec4(0.2f, 0.8f, 0.2f, 0.8f));
 	m_scene->addActor(top);
 
-	Plane* bottom = new Plane(glm::vec2(0.0f, 1.0f), -55.0f, glm::vec4(0.2f, 0.8f, 0.2f, 0.8f));
+	Plane* bottom = new Plane(glm::vec2(0.0f, 1.0f), -58.0f, glm::vec4(0.2f, 0.8f, 0.2f, 0.8f));
 	m_scene->addActor(bottom);
 
-	Plane* left = new Plane(glm::vec2(1.0f, 0.0f), -95.0f, glm::vec4(0.2f, 0.8f, 0.2f, 0.8f));
+	Plane* left = new Plane(glm::vec2(1.0f, 0.0f), -100.0f, glm::vec4(0.2f, 0.8f, 0.2f, 0.8f));
 	m_scene->addActor(left);
 
-	Plane* right = new Plane(glm::vec2(-1.0f, 0.0f), -95.0f, glm::vec4(0.2f, 0.8f, 0.2f, 0.8f));
+	Plane* right = new Plane(glm::vec2(-1.0f, 0.0f), -100.0f, glm::vec4(0.2f, 0.8f, 0.2f, 0.8f));
 	m_scene->addActor(right);
 
 	return true;

@@ -11,7 +11,7 @@ bool PhysicsGame::startup()
 	aie::Gizmos::create(255U, 255U, 65535U, 65535U);
 
 	m_renderer = new aie::Renderer2D();
-	setBackgroundColour(0.2f, 0.5f, 0.2f, 0.8f);
+	setBackgroundColour(0.2f, 0.4f, 0.2f, 0.8f);
 
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 

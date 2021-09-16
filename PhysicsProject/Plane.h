@@ -24,4 +24,3 @@ private:
 	float m_distance;
 	glm::vec4 m_color;
 };
-

@@ -43,7 +43,7 @@ void RigidBody::resolveCollision(RigidBody* other)
 	//MB: Mass of object "B"
 
 	//e
-	float elasticity = 1.0f;
+	float elasticity = 0.8f;
 	//Vrel
 	glm::vec2 relativeVelocity = other->getVelocity() - getVelocity();
 	//n

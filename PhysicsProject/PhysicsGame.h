@@ -3,6 +3,8 @@
 #include "Renderer2D.h"
 #include "PhysicsScene.h"
 
+class Sphere;
+
 class PhysicsGame : public aie::Application
 {
 public:
@@ -18,6 +20,7 @@ public:
 private:
 	aie::Renderer2D* m_renderer;
 	aie::Font* m_font;
+	Sphere* m_cue;
 
 	PhysicsScene* m_scene;
 };

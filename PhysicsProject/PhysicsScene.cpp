@@ -99,7 +99,6 @@ bool PhysicsScene::planeToSphere(PhysicsObject* object1, PhysicsObject* object2)
 
 bool PhysicsScene::planeToBox(PhysicsObject* object1, PhysicsObject* object2)
 {
-
 	return false;
 }
 

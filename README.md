@@ -1,5 +1,4 @@
-#Billiards
+## Billiards
 
-##Controls:
-
-WASD - Move
+### Controls:
+	WASD - Move

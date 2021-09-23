@@ -1,4 +1,8 @@
-## Billiards
+### Billiards
 
-### Controls:
-	WASD - Move
+##### /***This game uses bootstrap***\
+
+#### Controls:
+
+    WASD - Move
+    R - Reset

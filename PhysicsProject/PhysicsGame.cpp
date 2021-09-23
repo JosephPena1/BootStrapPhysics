@@ -8,6 +8,7 @@
 
 bool PhysicsGame::startup()
 {
+	m_setTimer = false;
 	aie::Gizmos::create(255U, 255U, 65535U, 65535U);
 
 	m_renderer = new aie::Renderer2D();
@@ -60,6 +61,7 @@ bool PhysicsGame::startup()
 
 void PhysicsGame::shutdown()
 {
+	m_scene->removeAllActors();
 	delete m_renderer;
 	delete m_scene;
 	delete m_font;
@@ -67,6 +69,14 @@ void PhysicsGame::shutdown()
 
 void PhysicsGame::update(float deltaTime)
 {
+	if (m_setTimer)
+	{
+		m_time = 0.4f;
+		m_setTimer = true;
+	}
+
+	m_time -= deltaTime;
+
 	//Get the input instance
 	aie::Input* input = aie::Input::getInstance();
 
@@ -88,6 +98,14 @@ void PhysicsGame::update(float deltaTime)
 	//Exit on Esc
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
+
+	if (input->wasKeyReleased(aie::INPUT_KEY_R) && m_time <= 0)
+	{
+		shutdown();
+		startup();
+		
+		m_time = 0.4f;
+	}
 }
 
 void PhysicsGame::draw()

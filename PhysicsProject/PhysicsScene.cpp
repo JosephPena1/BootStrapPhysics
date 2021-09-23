@@ -24,6 +24,11 @@ void PhysicsScene::removeActor(PhysicsObject* actor)
 	m_actors.erase(actor);
 }
 
+void PhysicsScene::removeAllActors()
+{
+	m_actors.erase(m_actors.begin(), m_actors.end());
+}
+
 void PhysicsScene::update(float deltaTime)
 {
 	static float accumulatedTime = 0.0f;

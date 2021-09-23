@@ -18,6 +18,8 @@ public:
 	virtual void draw();
 
 private:
+	bool m_setTimer;
+	float m_time;
 	aie::Renderer2D* m_renderer;
 	aie::Font* m_font;
 	Sphere* m_cue;

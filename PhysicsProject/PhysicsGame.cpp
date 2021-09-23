@@ -82,7 +82,7 @@ void PhysicsGame::update(float deltaTime)
 
 	aie::Gizmos::clear();
 
-	float speed = 2.0f;
+	float speed = 2.0f * m_cue->getMass();
 
 	if (input->isKeyDown(aie::INPUT_KEY_D))
 		m_cue->applyForce({ speed, 0 });

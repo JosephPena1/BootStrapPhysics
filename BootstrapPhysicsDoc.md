@@ -21,9 +21,7 @@
 
 ### Headers:
 
-**File**: [PhysicsGame](PhysicsProject/PhysicsGame.h).h
-
-**Class**: PhysicsGame : public aie::Application 
+#### Class [PhysicsGame](PhysicsProject/PhysicsGame.h)
 
 | Functions | Member class | Type | Description |
 | --------- | ------------ | ---- | ----------- |
@@ -36,9 +34,7 @@
 
 <br/>
 
-**File**: [PhysicsObject](PhysicsProject/PhysicsObject.h).h
-
-**Class**: PhysicsObject, enum ShapeType[^1]
+#### Class [PhysicsObject](PhysicsProject/PhysicsObject.h)
 
 | Functions | Member class | Type | Description |
 | --------- | ------------ | ---- | ----------- |
@@ -49,9 +45,7 @@
 
 <br/>
 
-**File**: [PhysicsScene](PhysicsProject/PhysicsScene.h).h
-
-**Class**: PhysicsScene, (Foward declare) PhysicsObject
+#### Class [PhysicsScene](PhysicsProject/PhysicsScene.h)
 
 | Functions | Member class | Type | Description |
 | --------- | ------------ | ---- | ----------- |
@@ -75,9 +69,7 @@
 
 <br/>
 
-**File**: [RigidBody](PhysicsProject/RigidBody.h).h
-
-**Class**: RigidBody : public PhysicsObject
+#### Class [RigidBody](PhysicsProject/RigidBody.h)
 
 | Functions | Member class | Type | Description |
 | --------- | ------------ | ---- | ----------- |
@@ -94,9 +86,7 @@
 
 <br/>
 
-**File**: [Plane](PhysicsProject/Plane.h).h
-
-**Class**: Plane : public PhysicsObject, (Forward declare) RigidBody
+#### Class [Plane](PhysicsProject/Plane.h)
 
 | Functions | Member class | Type | Description |
 | --------- | ------------ | ---- | ----------- |
@@ -111,9 +101,7 @@
 
 <br/>
 
-**File**: [Sphere](PhysicsProject/Sphere.h).h
-
-**Class**: Sphere : public RigidBody
+#### Class [Sphere](PhysicsProject/Sphere.h)
 
 | Functions | Member class | Type | Description |
 | --------- | ------------ | ---- | ----------- |

@@ -1,10 +1,13 @@
 #pragma once
 
+struct GLFWwindow;
+
 class Application
 {
 public:
 
 	Application();
+	Application(int width, int height, const char* title);
 	~Application();
 
 	int run();
@@ -13,11 +16,14 @@ private:
 
 	int start();
 	int update();
+	int draw();
 	int end();
 
 	bool getGameOver();
 
 private:
 
-	GLFWwindow* m_window;
+	GLFWwindow* m_window = nullptr;
+	int m_width, m_height;
+	const char* m_title;
 };

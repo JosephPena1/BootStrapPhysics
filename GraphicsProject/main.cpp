@@ -1,48 +1,14 @@
-#include "gl_core_4_4.h"
-#include "GLFW/glfw3.h"
-#include <iostream>
-
-void end(GLFWwindow* window)
-{
-	glfwDestroyWindow(window);
-	glfwTerminate();
-}
+#include "Application.h"
 
 int main()
 {
-	//Initialize
-	if (glfwInit() == GLFW_FALSE)
-		return -1;
+	int exitCode = 0;
 
-	//Creates a window
-	GLFWwindow* window = glfwCreateWindow(1280, 720, "Graphics", nullptr, nullptr);
-	if (!window)
-	{
-		glfwTerminate();
-		return-2;
-	}
-	glfwMakeContextCurrent(window);
+	Application* game = new Application(1280,720,"Graphics");
 
-	//Load OpenGL
-	if (ogl_LoadFunctions() == ogl_LOAD_FAILED)
-	{
-		end(window);
-		return -3;
-	}
-	//Prints out the OpenGL version to the console
-	int majorVersion = ogl_GetMajorVersion();
-	int minorVersion = ogl_GetMinorVersion();
-	printf("OpenGL Version: %i.%i\n", majorVersion, minorVersion);
+	exitCode = game->run();
 
-	//Update
-	while (!glfwWindowShouldClose(window) 
-		&& glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
-	{
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
+	delete game;
 
-	//Cleanup and exit
-	end(window);
-	return 0;
+	return exitCode;
 }

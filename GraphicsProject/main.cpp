@@ -2,11 +2,9 @@
 
 int main()
 {
-	int exitCode = 0;
-
 	Application* game = new Application(1280,720,"Graphics");
 
-	exitCode = game->run();
+	int exitCode = game->run();
 
 	delete game;
 

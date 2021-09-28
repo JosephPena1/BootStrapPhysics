@@ -25,6 +25,7 @@ int Application::run()
 	int exitCode = 0;
 
 	exitCode = start();
+	//Can also do [exitCode = start() != 0] but messes with exit codes
 	if (exitCode)
 		return exitCode;
 

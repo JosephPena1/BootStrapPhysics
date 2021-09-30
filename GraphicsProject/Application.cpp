@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "gl_core_4_4.h"
 #include "GLFW/glfw3.h"
+#include "glm/ext.hpp"
 #include <iostream>
 
 Application::Application() : Application(1280, 720, "Window")
@@ -74,6 +75,10 @@ int Application::start()
 	int minorVersion = ogl_GetMinorVersion();
 	printf("OpenGL Version: %i.%i\n", majorVersion, minorVersion);
 
+	//Initializes the screen
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+	glEnable(GL_DEPTH_TEST);
+
 	//Initialize the shader
 	m_shader.loadShader(aie::eShaderStage::VERTEX, "simpleVert.shader");
 	m_shader.loadShader(aie::eShaderStage::FRAGMENT, "simpleFrag.shader");
@@ -86,6 +91,20 @@ int Application::start()
 
 	//Initialize the quad
 	m_quad.start();
+
+	//Create camera transforms
+	m_viewMatrix = glm::lookAt(
+		glm::vec3(10, 10, 10),
+		glm::vec3(0),
+		glm::vec3(0, 1, 0)
+	);
+
+	m_projectionMatrix = glm::perspective(
+		glm::pi<float>() / 4.0f,
+		(float)m_width / (float)m_height,
+		0.001f,
+		1000.0f
+	);
 
 	return 0;
 }
@@ -105,11 +124,18 @@ int Application::draw()
 	if (!m_window)
 		return -5;
 
-	glfwSwapBuffers(m_window);
+	//Clear the screen
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	m_shader.bind();
 
+	glm::mat4 projectViewModel = m_projectionMatrix * m_viewMatrix * m_quad.getTransform();
+	m_shader.bindUniform("projectionViewModel", projectViewModel);
+
 	m_quad.draw();
+
+	glfwSwapBuffers(m_window);
+
 	return 0;
 }
 

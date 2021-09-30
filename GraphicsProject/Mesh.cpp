@@ -2,6 +2,14 @@
 
 Mesh::Mesh()
 {
+	m_transform = 
+	{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	};
+
 	m_triCount = 0;
 	m_vertexArrayObject = 0;
 	m_vertexBufferObject = 0;
@@ -49,12 +57,12 @@ void Mesh::start()
 	//Enable vertex position as first attribute
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(
-		0,						//Attribute index
-		4,						//Number of values within attribute
-		GL_FLOAT,				//Type of each value
-		GL_FALSE,				//Wether to normalize
-		sizeof(Vertex),			//Size in bytes of the one vertex
-		0	//Memory position of this attribute
+		0,					//Attribute index
+		4,					//Number of values within attribute
+		GL_FLOAT,			//Type of each value
+		GL_FALSE,			//Wether to normalize
+		sizeof(Vertex),		//Size in bytes of the one vertex
+		0					//Memory position of this attribute
 	);
 
 	//Unbind buffer and array

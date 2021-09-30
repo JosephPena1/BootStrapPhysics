@@ -100,6 +100,8 @@ int Application::update()
 	if (!m_window)
 		return -4;
 
+	m_world->update();
+
 	glfwPollEvents();
 
 	return 0;
@@ -129,6 +131,8 @@ int Application::end()
 {
 	if (!m_window)
 		return -6;
+
+	m_world->end();
 
 	glfwDestroyWindow(m_window);
 	glfwTerminate();

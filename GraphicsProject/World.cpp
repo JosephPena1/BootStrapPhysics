@@ -27,7 +27,7 @@ void World::start()
 	);
 }
 
-void World::update()
+void World::update(float deltaTime)
 {
 
 }

@@ -33,7 +33,7 @@ int Application::run()
 	while (!getGameOver())
 	{
 		//Update and draw
-		exitCode = update();
+		exitCode = update(0);
 		if (exitCode)
 			return exitCode;
 
@@ -95,12 +95,12 @@ int Application::start()
 	return 0;
 }
 
-int Application::update()
+int Application::update(float deltaTime)
 {
 	if (!m_window)
 		return -4;
 
-	m_world->update();
+	m_world->update(deltaTime);
 
 	glfwPollEvents();
 

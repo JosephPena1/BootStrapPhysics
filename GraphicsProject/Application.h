@@ -15,7 +15,7 @@ public:
 
 private:
 	int start();
-	int update();
+	int update(float deltaTime);
 	int draw();
 	int end();
 

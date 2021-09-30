@@ -1,4 +1,5 @@
 #pragma once
+#include "Entity.h"
 #include "gl_core_4_4.h"
 #include "glm\vec4.hpp"
 #include "glm\mat4x4.hpp"
@@ -9,14 +10,14 @@ struct Vertex
 	glm::vec4 color;
 };
 
-class Mesh
+class Mesh : public Entity
 {
 public:
 	Mesh();
 	~Mesh();
 
-	void start();
-	void draw();
+	void start() override;
+	void draw() override;
 
 	void generateVertices(Vertex* vertices, int& vertexCount);
 

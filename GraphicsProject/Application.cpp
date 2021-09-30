@@ -25,12 +25,12 @@ int Application::run()
 	int exitCode = 0;
 
 	exitCode = start();
-	//Can also do [exitCode = start() != 0] but messes with exit codes
 	if (exitCode)
 		return exitCode;
 
 	while (!getGameOver())
 	{
+		//Update and draw
 		exitCode = update();
 		if (exitCode)
 			return exitCode;
@@ -74,6 +74,19 @@ int Application::start()
 	int minorVersion = ogl_GetMinorVersion();
 	printf("OpenGL Version: %i.%i\n", majorVersion, minorVersion);
 
+	//Initialize the shader
+	m_shader.loadShader(aie::eShaderStage::VERTEX, "simpleVert.shader");
+	m_shader.loadShader(aie::eShaderStage::FRAGMENT, "simpleFrag.shader");
+
+	if (!m_shader.link())
+	{
+		printf("Shader Error: %s\n", m_shader.getLastError());
+		return -10;
+	}
+
+	//Initialize the quad
+	m_quad.start();
+
 	return 0;
 }
 
@@ -93,6 +106,10 @@ int Application::draw()
 		return -5;
 
 	glfwSwapBuffers(m_window);
+
+	m_shader.bind();
+
+	m_quad.draw();
 	return 0;
 }
 

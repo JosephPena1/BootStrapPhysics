@@ -14,7 +14,10 @@ public:
 	Mesh();
 	~Mesh();
 
+	void start();
+	void draw();
+
 private:
-	unsigned int m_triCount, m_vertexArray,
-		m_vertexBuffer, m_indexBuffer;
+	unsigned int m_triCount, m_vertexArrayObject,
+		m_vertexBufferObject, m_indexBufferObject;
 };

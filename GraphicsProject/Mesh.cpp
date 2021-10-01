@@ -36,24 +36,13 @@ void Mesh::start()
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
 
 	//Generate the vertices
-	/*Vertex* vertices{};
-	int vertexCount;
-	generateVertices(vertices, vertexCount);*/
-	Vertex vertices[6];
-
-	//Triangle 0
-	vertices[0].position = { -0.5f, 0.0f, 0.5f, 1.0f };
-	vertices[1].position = { 0.5f, 0.0f, 0.5f, 1.0f };
-	vertices[2].position = { -0.5f, 0.0f, -0.5f, 1.0f };
-	//Triangle 1
-	vertices[3].position = { 0.5f, 0.0f, 0.5f, 1.0f };
-	vertices[4].position = { -0.5f, 0.0f, -0.5f, 1.0f };
-	vertices[5].position = { 0.5f, 0.0f, -0.5f, 1.0f };
+	unsigned int vertexCount;
+	Vertex* vertices = generateVertices(vertexCount, m_triCount);
 
 	//Fill vertex buffer
 	glBufferData(
 		GL_ARRAY_BUFFER,	//Type of buffer
-		sizeof(Vertex) * 6,	//Size of bytes of all vertices
+		sizeof(Vertex) * vertexCount,	//Size of bytes of all vertices
 		vertices,			//All vertices
 		GL_STATIC_DRAW		//How the data will update
 	);
@@ -68,34 +57,27 @@ void Mesh::start()
 		sizeof(Vertex),		//Size in bytes of the one vertex
 		0					//Memory position of this attribute
 	);
+	//Enable vertex color as second attribute
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(
+		1,						//Attribute index
+		4,						//Number of values within attributes
+		GL_FLOAT,				//Type of each value
+		GL_FALSE,				//Wether to normalize
+		sizeof(Vertex),			//Size in bytes of one vertex
+		(void*)sizeof(glm::vec4)//Memory position of this attribute
+	);
 
 	//Unbind buffer and array
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	//Deallocate memory
-	//delete[] vertices;
+	delete[] vertices;
 }
 
 void Mesh::draw()
 {
 	glBindVertexArray(m_vertexArrayObject);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-}
-
-void Mesh::generateVertices(Vertex* vertices, int& vertexCount)
-{
-	//vertexCount = 6;
-
-	////Define the vertices for a quad
-	//vertices = new Vertex[vertexCount];
-
-	////Triangle 0
-	//vertices[0].position = { -0.5f, 0.0f, 0.5f, 1.0f };
-	//vertices[1].position = { 0.5f, 0.0f, 0.5f, 1.0f };
-	//vertices[2].position = { -0.5f, 0.0f, -0.5f, 1.0f };
-	////Triangle 1
-	//vertices[3].position = { 0.5f, 0.0f, 0.5f, 1.0f };
-	//vertices[4].position = { -0.5f, 0.0f, -0.5f, 1.0f };
-	//vertices[5].position = { 0.5f, 0.0f, -0.5f, 1.0f };
+	glDrawArrays(GL_TRIANGLES, 0, m_triCount * 3);
 }

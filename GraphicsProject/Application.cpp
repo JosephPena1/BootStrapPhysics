@@ -33,7 +33,7 @@ int Application::run()
 	while (!getGameOver())
 	{
 		//Update and draw
-		exitCode = update(1.0f);
+		exitCode = update(glfwGetTime());
 		if (exitCode)
 			return exitCode;
 

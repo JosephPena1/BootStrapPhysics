@@ -33,9 +33,9 @@ void World::update(float deltaTime)
 
 }
 
-void World::draw()
+void World::draw(aie::ShaderProgram* shader)
 {
-	m_quad.draw();
+	m_quad.draw(shader);
 }
 
 void World::end()
@@ -43,7 +43,7 @@ void World::end()
 
 }
 
-glm::mat4 World::getProjectionViewModel()
+glm::mat4 World::getProjectionView()
 {
-	return m_projectionMatrix * m_camera.getTransform() * m_quad.getTransform();
+	return m_projectionMatrix * m_camera.getTransform();
 }

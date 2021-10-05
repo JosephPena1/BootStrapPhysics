@@ -23,8 +23,13 @@ Vertex* Quad::generateVertices(unsigned int& vertexCount, unsigned int& triCount
 	vertices[4].position = { -1.0f, 0.0f, -1.0f, 1.0f };
 	vertices[5].position = { 1.0f, 0.0f, -1.0f, 1.0f };
 
+	//Set the color and normal
 	for (int i = 0; i < vertexCount; i++)
+	{
 		vertices[i].color = m_color;
+		vertices[i].normal = { 0.0f, 1.0f, 0.0f, 0.0f };
+	}
+	vertices[5].normal = { 1, 1, 1, 0 };
 
 	vertices[0].color = { -0.9f, 0.0f, 0.0f, 1.0f };
 	vertices[2].color = { 1.0f, 0.5f, 0.0f, 1.0f };

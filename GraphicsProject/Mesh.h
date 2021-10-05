@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity.h"
+#include "Shader.h"
 #include "gl_core_4_4.h"
 #include "glm\vec4.hpp"
 #include "glm\mat4x4.hpp"
@@ -8,16 +8,17 @@ struct Vertex
 {
 	glm::vec4 position;
 	glm::vec4 color;
+	glm::vec4 normal;
 };
 
-class Mesh : public Entity
+class Mesh
 {
 public:
 	Mesh();
 	~Mesh();
 
-	void start() override;
-	void draw() override;
+	void start();
+	void draw(aie::ShaderProgram* shader);
 
 	virtual Vertex* generateVertices(unsigned int& vertexCount, unsigned int& triCount) = 0;
 

@@ -155,8 +155,11 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="OBJMesh.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,8 +167,12 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="OBJMesh.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Time.h" />
+    <ClInclude Include="tiny_obj_loader.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #include "gl_core_4_4.h"
 #include "GLFW/glfw3.h"
 #include "glm/ext.hpp"
+#include "Time.h"
 #include <iostream>
 
 Application::Application() : Application(1280, 720, "Window")
@@ -29,28 +30,14 @@ int Application::run()
 {
 	int exitCode = 0;
 
-	//Initialize time variables
-	double previousTime = glfwGetTime();
-	double currentTime = 0;
-	double deltaTime = 0;
-	unsigned int frames = 0;
-	double fpsInternal = 0;
-
 	exitCode = start();
 	if (exitCode)
 		return exitCode;
 
 	while (!getGameOver())
 	{
-		//Update time
-		currentTime = glfwGetTime();
-		deltaTime = currentTime - previousTime;
-		if (deltaTime > 0.1f)
-			deltaTime = 0.1f;
-		previousTime = currentTime;
-
 		//Update and draw
-		if (exitCode = update(deltaTime) != 0)
+		if (exitCode = update(Time::getDeltaTime()) != 0)
 			return exitCode;
 
 		if (exitCode = draw(m_shader) != 0)

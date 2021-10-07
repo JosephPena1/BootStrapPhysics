@@ -6,9 +6,11 @@
 
 struct Vertex
 {
-	glm::vec4 position;
-	glm::vec4 color;
-	glm::vec4 normal;
+	glm::vec4 position;	//0
+	glm::vec4 normal;	//1
+	glm::vec2 texCoord;	//2
+	glm::vec4 tangent;	//3
+	glm::vec4 color;	//4
 };
 
 class Mesh

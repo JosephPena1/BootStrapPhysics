@@ -50,7 +50,7 @@ void World::update(double deltaTime)
 	int keyUp = GLFW_KEY_E;
 	int keyDown = GLFW_KEY_Q;
 
-	float cameraSpeed = 1.0f;
+	float cameraSpeed = 3.0f;
 	double cameraSensitivity = 0.5f;
 
 	//Calculate the cameras forward vector
@@ -136,7 +136,7 @@ void World::draw(aie::ShaderProgram* shader)
 	shader->bindUniform("lightDiffuse", m_light.getDiffuse());
 	shader->bindUniform("lightSpecular", m_light.getSpecular());
 	shader->bindUniform("lightSpecularPower", m_light.getSpecularPower());
-	//m_quad.draw(shader);
+	m_quad.draw(shader);
 	shader->bindUniform("modelMatrix", m_objTransform);
 	m_objMesh.draw();
 }

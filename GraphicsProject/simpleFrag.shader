@@ -38,7 +38,7 @@ void main()
 	vec3 reflectionNormal = reflect(lightNormal, surfaceNormal);
 	float specularTerm = dot(surfaceToView, reflectionNormal);
 	specularTerm = max(0.0f, specularTerm);
-	specularTerm = pow(specularTerm, lightSpecularPower);
+	specularTerm = pow(specularTerm, specularPower);
 	vec4 specularColor = vec4(Ks, 1.0f)* lightSpecular * specularTerm;
 
 	FragColor = ambientColor + diffuseColor + specularColor;

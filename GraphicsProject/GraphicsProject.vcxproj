@@ -176,8 +176,14 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Bunny.mtl" />
     <None Include="simpleFrag.shader" />
     <None Include="simpleVert.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Bunny.obj">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

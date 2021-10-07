@@ -91,5 +91,13 @@
     <None Include="simpleVert.shader">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Bunny.mtl">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Bunny.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
   </ItemGroup>
 </Project>

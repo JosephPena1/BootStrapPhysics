@@ -1,6 +1,6 @@
 #include "World.h"
 #include "glm/ext.hpp"
-#include "GLFW/glfw3.h"
+//#include "GLFW/glfw3.h"
 
 World::World(int width, int height)
 {
@@ -10,6 +10,8 @@ World::World(int width, int height)
 
 void World::start()
 {
+	//Initialize the OBJ mesh
+	m_objMesh.load("Bunny.obj", false);
 	//Initialize the quad
 	m_quad.setTransform(glm::mat4(10.0f));
 	m_quad.setColor(glm::vec4(0.6f, 0.0f, 0.6f, 1.0f));
@@ -22,8 +24,8 @@ void World::start()
 
 	//Create camera transforms
 	Transform cameraTransform = m_camera.getTransform();
-	cameraTransform.setPosition(glm::vec3(1.0f));
-	cameraTransform.setRotation(glm::vec3(45.0f, 45.0f, 0.0f));
+	//cameraTransform.setPosition(glm::vec3(1.0f));
+	//cameraTransform.setRotation(glm::vec3(45.0f, 45.0f, 0.0f));
 	m_camera.setTransform(cameraTransform);
 	/*m_camera.setTransform(glm::lookAt(
 		glm::vec3(2, 2, 2),
@@ -133,9 +135,10 @@ void World::draw(aie::ShaderProgram* shader)
 	shader->bindUniform("lightAmbient", m_light.getAmbient());
 	shader->bindUniform("lightDiffuse", m_light.getDiffuse());
 	shader->bindUniform("lightSpecular", m_light.getSpecular());
-	shader->bindUniform("specularPower", m_light.getSpecularPower());
-	
-	m_quad.draw(shader);
+	shader->bindUniform("lightSpecularPower", m_light.getSpecularPower());
+	//m_quad.draw(shader);
+	shader->bindUniform("modelMatrix", m_objTransform);
+	m_objMesh.draw();
 }
 
 void World::end()

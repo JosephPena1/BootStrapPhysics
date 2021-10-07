@@ -4,6 +4,7 @@ class Time
 {
 public:
 	static double getDeltaTime();
+	//maybe have an update, then just return deltatime in a getter.
 
 private:
 	double m_currentTime = 0.0;

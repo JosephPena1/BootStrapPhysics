@@ -14,7 +14,8 @@ class OBJMesh {
 public:
 
 	// a vertex structure for obj files
-	struct Vertex {
+	struct Vertex 
+	{
 		glm::vec4 position; // added to attrib location 0
 		glm::vec4 normal;	// added to attrib location 1
 		glm::vec2 texcoord;	// added to attrib location 2
@@ -24,7 +25,8 @@ public:
 	};
 
 	// a basic material
-	class Material {
+	class Material 
+	{
 	public:
 
 		Material() : ambient(1), diffuse(1), specular(0), emissive(0), specularPower(1), opacity(1) {}
@@ -67,7 +69,8 @@ private:
 
 	void calculateTangents(std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
 
-	struct MeshChunk {
+	struct MeshChunk 
+	{
 		unsigned int	vao, vbo, ibo;
 		unsigned int	indexCount;
 		int				materialID;

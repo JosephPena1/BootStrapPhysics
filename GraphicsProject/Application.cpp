@@ -12,6 +12,7 @@ Application::Application() : Application(1280, 720, "Window")
 Application::Application(int width, int height, const char* title)
 {
 	m_world = new World(width, height);
+	m_world->setWindow(m_window);
 	m_width = width;
 	m_height = height;
 	m_title = title;
@@ -28,24 +29,35 @@ int Application::run()
 {
 	int exitCode = 0;
 
+	//Initialize time variables
+	double previousTime = glfwGetTime();
+	double currentTime = 0;
+	double deltaTime = 0;
+	unsigned int frames = 0;
+	double fpsInternal = 0;
+
 	exitCode = start();
 	if (exitCode)
 		return exitCode;
 
 	while (!getGameOver())
 	{
+		//Update time
+		currentTime = glfwGetTime();
+		deltaTime = currentTime - previousTime;
+		if (deltaTime > 0.1f)
+			deltaTime = 0.1f;
+		previousTime = currentTime;
+
 		//Update and draw
-		exitCode = update(glfwGetTime());
-		if (exitCode)
+		if (exitCode = update(deltaTime) != 0)
 			return exitCode;
 
-		exitCode = draw(m_shader);
-		if (exitCode)
+		if (exitCode = draw(m_shader) != 0)
 			return exitCode;
 	}
 
-	exitCode = end();
-	if (exitCode)
+	if (exitCode = end() != 0)
 		return exitCode;
 
 	return 0;
@@ -92,12 +104,13 @@ int Application::start()
 		return -10;
 	}
 
+	m_world->setWindow(m_window);
 	m_world->start();
 
 	return 0;
 }
 
-int Application::update(float deltaTime)
+int Application::update(double deltaTime)
 {
 	if (!m_window)
 		return -4;

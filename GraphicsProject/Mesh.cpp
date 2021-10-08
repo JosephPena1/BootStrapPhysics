@@ -47,6 +47,7 @@ void Mesh::start()
 		GL_STATIC_DRAW		//How the data will update
 	);
 
+	unsigned int memoryPos = 0u;
 	//Enable vertex position as first attribute
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(
@@ -55,18 +56,33 @@ void Mesh::start()
 		GL_FLOAT,			//Type of each value
 		GL_FALSE,			//Wether to normalize
 		sizeof(Vertex),		//Size in bytes of the one vertex
-		0					//Memory position of this attribute
+		(void*)memoryPos	//Memory position of this attribute
 	);
+	memoryPos += sizeof(Vertex::position);
+
 	//Enable vertex color as second attribute
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(
-		1,						//Attribute index
-		4,						//Number of values within attributes
-		GL_FLOAT,				//Type of each value
-		GL_FALSE,				//Wether to normalize
-		sizeof(Vertex),			//Size in bytes of one vertex
-		(void*)sizeof(glm::vec4)//Memory position of this attribute
+		1,					//Attribute index
+		4,					//Number of values within attributes
+		GL_FLOAT,			//Type of each value
+		GL_FALSE,			//Wether to normalize
+		sizeof(Vertex),		//Size in bytes of one vertex
+		(void*)memoryPos	//Memory position of this attribute
 	);
+	memoryPos += sizeof(Vertex::color);
+
+	//Enable vertex [TEXTURE COORDINATE] as third attribute
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(
+		2,					//Attribute index
+		2,					//Number of values within attributes
+		GL_FLOAT,			//Type of each value
+		GL_FALSE,			//Wether to normalize
+		sizeof(Vertex),		//Size in bytes of one vertex
+		(void*)memoryPos	//Memory position of this attribute
+	);
+	memoryPos += sizeof(Vertex::texCoord);
 
 	//Unbind buffer and array
 	glBindVertexArray(0);

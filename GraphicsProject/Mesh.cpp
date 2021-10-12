@@ -48,7 +48,7 @@ void Mesh::start()
 	);
 
 	unsigned int memoryPos = 0u;
-	//Enable vertex position as first attribute
+	//Enable vertex [POSITION] as first attribute
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(
 		0,					//Attribute index
@@ -60,7 +60,7 @@ void Mesh::start()
 	);
 	memoryPos += sizeof(Vertex::position);
 
-	//Enable vertex color as second attribute
+	//Enable vertex [COLOR] as second attribute
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(
 		1,					//Attribute index
